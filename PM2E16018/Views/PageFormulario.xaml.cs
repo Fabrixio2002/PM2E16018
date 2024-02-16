@@ -56,34 +56,47 @@ public partial class PageFormulario : ContentPage
 
     private async void Agregar_Clicked(object sender, EventArgs e)
     {
+        // Validar si hay una foto seleccionada
+        if (foto.Source == null)
+        {
+            await DisplayAlert("Error", "Por favor, seleccione una foto.", "OK");
+            return; // Salir del método si no hay foto
+        }
+
+        // Validar si se ha proporcionado una descripción
+        if (string.IsNullOrWhiteSpace(txtarea.Text))
+        {
+            await DisplayAlert("Error", "Por favor, ingrese una descripción.", "OK");
+            return; // Salir del método si no hay descripción
+        }
+
+        // Obtener la ubicación actual
         var request = new GeolocationRequest(GeolocationAccuracy.Default);
         var location = await Geolocation.GetLocationAsync(request);
-        var latitude = location.Latitude;
-        var longitude = location.Longitude;
+        var latitude = location?.Latitude ?? 0;
+        var longitude = location?.Longitude ?? 0;
         txtla.Text = latitude.ToString();
         txtlo.Text = longitude.ToString();
 
-
+        // Crear el objeto Sitio con los datos proporcionados
         var sitio = new Models.Sitios
         {
             Longitud = txtlo.Text,
             Latitud = txtla.Text,
-            Descripcion= txtarea.Text,
+            Descripcion = txtarea.Text,
             foto = GetImagen()
-
         };
 
-
-        // Utilizar la instancia existente de PersonDB
+        // Utilizar la instancia existente de sitioDb para almacenar el sitio
         if (await sitioDb.StorePerson(sitio) > 0)
         {
-            await DisplayAlert("Éxito", "Persona guardada exitosamente.", "OK");
-
+            // Mostrar mensaje de éxito si se guarda correctamente
+            await DisplayAlert("Éxito", $"Sitio \"{sitio.Descripcion}\" se ha guardado correctamente.", "OK");
         }
         else
         {
-            await DisplayAlert("Error", $"Se produjo un error: ", "OK");
-
+            // Mostrar mensaje de error si no se puede guardar
+            await DisplayAlert("Error", "Se produjo un error al guardar el sitio.", "OK");
         }
 
 

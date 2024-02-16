@@ -10,35 +10,57 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
+        <Grid Padding="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <CollectionView x:Name="listPerson" 
-                SelectionMode="Single"
-                SelectionChanged="lisPerson_SelectionChanged">
+            <CollectionView x:Name="listPerson" 
+                            Grid.Row="0"
+                            SelectionMode="Single"
+                            SelectionChanged="lisPerson_SelectionChanged">
 
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"
-                               ItemSpacing="15">
-                </LinearItemsLayout>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2"
+                                     VerticalItemSpacing="15"
+                                     HorizontalItemSpacing="15">
+                    </GridItemsLayout>
+                </CollectionView.ItemsLayout>
 
-            </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Vertical">
+                            <!-- Foto -->
+                            <Image x:Name="foto" HeightRequest="70" 
+                                WidthRequest="70"
+                                Aspect="AspectFill"
+                                Source="{Binding foto,Converter={StaticResource BaseArray}}"/>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Image x:Name="foto" HeightRequest="70" 
-                        WidthRequest="70"
-                        Aspect="AspectFill"
-                        Source="{Binding foto,Converter={StaticResource BaseArray}}"/>
-                        <Label Text="{Binding Longitud}"/>
-                        <Label Text="{Binding Latitud}"/>
-                        <Label Text="{Binding Descripcion}"/>
-                        
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                            <StackLayout>
+                                <!-- Longitud -->
+                                <Label Text="Longitud: " FontAttributes="Bold"/>
+                                <Label x:Name="longi" Text="{Binding Longitud}"/>
+                                <!-- Latitud -->
+                                <Label Text="Latitud: " FontAttributes="Bold"/>
+                                <Label Text="{Binding Latitud}"/>
+                                <!-- Descripción -->
+                                <Label Text="Descripción: " FontAttributes="Bold"/>
+                                <Label Text="{Binding Descripcion}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-
-        </CollectionView>
+            <!-- Botones para eliminar, agregar e ir al sitio -->
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Eliminar" BackgroundColor="Red" Margin="10"/>
+                <Button Text="Actualizar" BackgroundColor="#4CAF50" Margin="10"/>
+                <Button Text="Ir a Sitio" BackgroundColor="#2196F3" Margin="10" Clicked="Button_Clicked_1"/>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 
 </ContentPage>
