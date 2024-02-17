@@ -6,5 +6,11 @@
              x:Class="PM2E16018.Views.PageMaps"
              Title="Map_Vista">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Boton Nuevo" Clicked="ToolbarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
     <maps:Map x:Name="map" ></maps:Map>
+
+
 </ContentPage>

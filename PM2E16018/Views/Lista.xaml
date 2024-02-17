@@ -56,8 +56,8 @@
 
             <!-- Botones para eliminar, agregar e ir al sitio -->
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Text="Eliminar" BackgroundColor="Red" Margin="10"/>
-                <Button Text="Actualizar" BackgroundColor="#4CAF50" Margin="10"/>
+                <Button Text="Eliminar" BackgroundColor="Red" Margin="10" Clicked="Button_Clicked"/>
+                <Button Text="Actualizar" BackgroundColor="#4CAF50" Margin="10" Clicked="Button_Clicked_2"/>
                 <Button Text="Ir a Sitio" BackgroundColor="#2196F3" Margin="10" Clicked="Button_Clicked_1"/>
             </StackLayout>
         </Grid>

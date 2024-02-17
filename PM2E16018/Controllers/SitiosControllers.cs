@@ -71,8 +71,18 @@ namespace PM2E16018.Controllers
             return await _connection.DeleteAsync(sitios);
         }
 
+        public async Task<int> UpdatePerson(Models.Sitios sitios)
+        {
+            await Init();
+            return await _connection.UpdateAsync(sitios);
+        }
 
-
+        //UPDATE
+        public async Task<int> UpdateAsync(Models.Sitios sitios)
+        {
+            await Init();
+            return await _connection.UpdateAsync(sitios);
+        }
 
 
 
